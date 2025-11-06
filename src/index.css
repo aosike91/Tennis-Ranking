@@ -2,46 +2,231 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: light; }
-html, body, #root { height: 100%; }
+:root {
+  color-scheme: light;
+}
 
-dialog::backdrop { background: rgba(0,0,0,.35); backdrop-filter: blur(2px); }
+/* Layout base */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+}
 
 /* ===== Animaciones ===== */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@keyframes pop { 0% { transform: scale(1); } 35% { transform: scale(1.04); } 100% { transform: scale(1); } }
-@keyframes glowBlue { 0% { box-shadow: 0 0 0 0 rgba(37,99,235,.25); } 100% { box-shadow: 0 0 24px 6px rgba(37,99,235,0); } }
-@keyframes glowPink { 0% { box-shadow: 0 0 0 0 rgba(236,72,153,.25); } 100% { box-shadow: 0 0 24px 6px rgba(236,72,153,0); } }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes pop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+@keyframes glowBlue {
+  0% { box-shadow: 0 0 0 0 rgba(37,99,235,.25); }
+  100% { box-shadow: 0 0 24px 6px rgba(37,99,235,0); }
+}
+@keyframes glowPink {
+  0% { box-shadow: 0 0 0 0 rgba(236,72,153,.25); }
+  100% { box-shadow: 0 0 24px 6px rgba(236,72,153,0); }
+}
 
 .anim-in { animation: fadeUp .35s ease-out both; }
 .tap { animation: pop .25s ease-out; }
 .pulse-blue { animation: glowBlue 1s ease-out 0s 2; }
 .pulse-pink { animation: glowPink 1s ease-out 0s 2; }
 
-/* Tarjeta estilo papel claro */
+/* ===== Tarjeta estilo papel claro ===== */
 .paper {
-  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.85));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255,255,255,.85));
   border: 1px solid rgba(15,23,42,.06);
-  box-shadow: 0 6px 18px rgba(2,6,23,.06);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.158);
   backdrop-filter: saturate(160%) blur(4px);
 }
 
-/* Contención de la tarjeta (permitimos que el badge salga fuera) */
-.card-safe { overflow: visible; min-width: 0; }
+.card-safe {
+  overflow: visible;
+  min-width: 0;
+}
 
-/* Botones */
-.btn { @apply rounded-xl px-3 py-2 text-sm font-medium transition shadow-sm; }
-.btn-ghost { @apply bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 active:scale-[.99]; }
-.btn-primary { @apply bg-indigo-600 text-white hover:brightness-110 active:scale-[.99]; }
-.btn-danger { @apply bg-rose-600 text-white hover:brightness-110 active:scale-[.99]; }
-.btn-warn { @apply bg-amber-500 hover:bg-amber-600 text-white active:scale-[.99]; }
+/* ===== Botones ===== */
+.btn {
+  @apply rounded-xl px-3 py-2 text-sm font-medium transition shadow-sm;
+}
+.btn-ghost {
+  @apply bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 active:scale-[.99];
+}
+.btn-primary {
+  @apply bg-indigo-600 text-white hover:brightness-110 active:scale-[.99];
+}
+.btn-danger {
+  @apply bg-rose-600 text-white hover:brightness-110 active:scale-[.99];
+}
+.btn-warn {
+  @apply bg-amber-500 hover:bg-amber-600 text-white active:scale-[.99];
+}
 
-/* Inputs claros */
-.input { @apply border border-slate-200 rounded-xl px-3 py-2 bg-white placeholder-slate-400; }
-.select { @apply border border-slate-200 rounded-xl px-3 py-2 bg-white; }
-.label { @apply text-sm text-slate-600; }
+/* ===== Inputs claros ===== */
+.input {
+  @apply border border-slate-200 rounded-xl px-3 py-2 bg-white placeholder-slate-400;
+}
+.select {
+  @apply border border-slate-200 rounded-xl px-3 py-2 bg-white;
+}
+.label {
+  @apply text-sm text-slate-600;
+}
 
-/* Tabs */
-.tab-btn { @apply px-3 py-1.5 rounded-full text-sm font-semibold transition; }
-.tab-active { @apply bg-indigo-600 text-white shadow-sm; }
-.tab-inactive { @apply bg-white border border-slate-200 text-slate-700 hover:bg-slate-50; }
+/* ===== Tabs ===== */
+.tab-btn {
+  @apply px-3 py-1.5 rounded-full text-sm font-semibold transition;
+}
+.tab-active {
+  @apply bg-indigo-600 text-white shadow-sm;
+}
+.tab-inactive {
+  @apply bg-white border border-slate-200 text-slate-700 hover:bg-slate-50;
+}
+
+/* =========================================================
+   AVATARES (FOTOS DE USUARIO)
+   Usa estas clases en los <img> para cambiar forma, tamaño y borde
+   ========================================================= */
+
+/* Valores por defecto (se pueden sobrescribir con las clases de abajo) */
+:root {
+  --avatar-size: 40px;
+  --avatar-radius: 999px; /* círculo */
+  --avatar-border-color: #e5e7eb;
+  --avatar-border-width: 2px;
+}
+
+/* Base */
+.avatar {
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: var(--avatar-radius);
+  object-fit: cover;
+  border: var(--avatar-border-width) solid var(--avatar-border-color);
+  box-shadow: 0 2px 6px rgba(15,23,42,.16);
+  background-color: #f9fafb;
+}
+
+/* Tamaños */
+.avatar-sm   { --avatar-size: 32px; }
+.avatar-md   { --avatar-size: 100px; }
+.avatar-lg   { --avatar-size: 56px; }
+.avatar-xl   { --avatar-size: 72px; }
+.avatar-2xl  { --avatar-size: 96px; }
+
+/* Formas */
+.avatar-circle  { --avatar-radius: 999px; }
+.avatar-rounded { --avatar-radius: 18px; }
+.avatar-square  { --avatar-radius: 10px; }
+
+/* Grosor del borde */
+.avatar-border-thin   { --avatar-border-width: 1px; }
+.avatar-border        { --avatar-border-width: 2px; }
+.avatar-border-thick  { --avatar-border-width: 3px; }
+.avatar-border-heavy  { --avatar-border-width: 4px; }
+
+/* Colores del borde (elige uno) */
+.avatar-border-slate   { --avatar-border-color: #cbd5f5; }
+.avatar-border-indigo  { --avatar-border-color: #f59300; }
+.avatar-border-emerald { --avatar-border-color: #10b981; }
+.avatar-border-rose    { --avatar-border-color: #fb7185; }
+.avatar-border-gold    { --avatar-border-color: #fbbf24; }
+
+/* Ejemplo de uso en JSX:
+   className="avatar avatar-md avatar-circle avatar-border-thick avatar-border-indigo"
+*/
+
+/* =========================================================
+   HISTORIAL DE PARTIDOS
+   Tarjetas limpias, sin el mismo estilo .paper ni sombra fuerte
+   ========================================================= */
+
+.match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Tarjeta individual del historial */
+.match-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  background: #f9fafb;
+  border: 1px solid rgba(148, 163, 253, 0.25);
+  box-shadow: none;               /* sin sombra gorda */
+}
+
+/* Texto interior flexible */
+.match-item-body {
+  flex: 1;
+  padding: 0 0.5rem;
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+/* Fecha */
+.match-item-date {
+  font-size: 0.7rem;
+  color: #6b7280;
+}
+
+/* Badges de WIN / LOSS diferenciados */
+.match-badge {
+  padding: 0.2rem 0.55rem;
+  border-radius: 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.match-badge-win {
+  background: #bbf7d0;
+  color: #166534;
+}
+
+.match-badge-loss {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ===== Badges P1 / P2 sobre el avatar ===== */
+
+.p-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(15,23,42,0.25);
+  z-index: 10;
+}
+
+.p-badge-p1 {
+  background: #4f46e5; /* Indigo */
+}
+
+.p-badge-p2 {
+  background: #22c55e; /* Emerald */
+}

@@ -20,7 +20,7 @@ dialog::backdrop { background: rgba(0,0,0,.35); backdrop-filter: blur(2px); }
 
 /* Tarjeta estilo papel claro */
 .paper {
-  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.85));
+  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255, 0, 0, 0.85));
   border: 1px solid rgba(15,23,42,.06);
   box-shadow: 0 6px 18px rgba(2,6,23,.06);
   backdrop-filter: saturate(160%) blur(4px);
