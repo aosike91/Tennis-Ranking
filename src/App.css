@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html, body, #root { height: 100%; }
+
+dialog::backdrop { background: rgba(0,0,0,.35); backdrop-filter: blur(2px); }
+
+/* ===== Animaciones ===== */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes pop { 0% { transform: scale(1); } 35% { transform: scale(1.04); } 100% { transform: scale(1); } }
+@keyframes glowBlue { 0% { box-shadow: 0 0 0 0 rgba(37,99,235,.25); } 100% { box-shadow: 0 0 24px 6px rgba(37,99,235,0); } }
+@keyframes glowPink { 0% { box-shadow: 0 0 0 0 rgba(236,72,153,.25); } 100% { box-shadow: 0 0 24px 6px rgba(236,72,153,0); } }
+
+.anim-in { animation: fadeUp .35s ease-out both; }
+.tap { animation: pop .25s ease-out; }
+.pulse-blue { animation: glowBlue 1s ease-out 0s 2; }
+.pulse-pink { animation: glowPink 1s ease-out 0s 2; }
+
+/* Tarjeta estilo papel claro */
+.paper {
+  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.85));
+  border: 1px solid rgba(15,23,42,.06);
+  box-shadow: 0 6px 18px rgba(2,6,23,.06);
+  backdrop-filter: saturate(160%) blur(4px);
+}
+
+/* Contención */
+.card-safe { overflow: hidden; min-width: 0; }
+
+/* Botones */
+.btn { @apply rounded-xl px-3 py-2 text-sm font-medium transition shadow-sm; }
+.btn-ghost { @apply bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 active:scale-[.99]; }
+.btn-primary { @apply bg-indigo-600 text-white hover:brightness-110 active:scale-[.99]; }
+.btn-danger { @apply bg-rose-600 text-white hover:brightness-110 active:scale-[.99]; }
+/* Nuevo: advertencia (ámbar/naranja medio) */
+.btn-warn { @apply bg-amber-500 hover:bg-amber-600 text-white active:scale-[.99]; }
+
+/* Inputs claros */
+.input { @apply border border-slate-200 rounded-xl px-3 py-2 bg-white placeholder-slate-400; }
+.select { @apply border border-slate-200 rounded-xl px-3 py-2 bg-white; }
+.label { @apply text-sm text-slate-600; }
+
+/* Tabs */
+.tab-btn { @apply px-3 py-1.5 rounded-full text-sm font-semibold transition; }
+.tab-active { @apply bg-indigo-600 text-white shadow-sm; }
+.tab-inactive { @apply bg-white border border-slate-200 text-slate-700 hover:bg-slate-50; }
